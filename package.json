@@ -1,0 +1,24 @@
+{
+  "name": "employeedatabase",
+  "version": "1.0.0",
+  "description": "NODE.js application to track employees, roles and departments.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pmarceaujr/EmployeeDatabase.git"
+  },
+  "author": "Paul Marceau",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pmarceaujr/EmployeeDatabase/issues"
+  },
+  "homepage": "https://github.com/pmarceaujr/EmployeeDatabase#readme",
+  "dependencies": {
+    "figlet": "^1.5.0",
+    "inquirer": "^8.1.0",
+    "mysql": "^2.18.1"
+  }
+}
