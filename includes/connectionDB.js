@@ -49,8 +49,9 @@ userLogin = async () => {
                 return response
             })
             .then((response) => {
-                return resolve(connectToDB(response.username, response.password, response.database))
+                resolve(connectToDB(response.username, response.password, response.database))
             })
+
     })
 }
 
@@ -76,7 +77,7 @@ connectToDB = async (user, password, database) => {
         //console.log(connection)
         if (err) throw err;
 
-        console.log(`connected as id ${connection.threadId}`);
+        //console.log(`connected as id ${connection.threadId}`);
         return (`connected as id ${connection.threadId}`);
 
         //connection.end();
