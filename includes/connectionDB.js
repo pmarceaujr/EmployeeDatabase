@@ -6,10 +6,9 @@ const inquirer = require('inquirer');
 
 // TODO: Create a function to initialize app
 
-const userLogin = () => {
-    console.log("Starting the Employee DB, please hold.......");
-    inquirer
-        .prompt([
+userLogin = async () => {
+    return new Promise((resolve, reject) => {
+        inquirer.prompt([
             {
                 name: "username",
                 type: "input",
@@ -49,22 +48,23 @@ const userLogin = () => {
             },
         ])
 
-        .then((response) => {
-            //console.log(response)
-            return response
-        })
-        .then((response) => {
-            //console.log(response.database)
-            //console.log(response.password)
-            // console.log(response.username)
-            connectToDB(response.username, response.password, response.database)
-        })
+            .then((response) => {
+                //console.log(response)
+                return response
+            })
+            .then((response) => {
+                //console.log(response.database)
+                //console.log(response.password)
+                // console.log(response.username)
+                return resolve(connectToDB(response.username, response.password, response.database))
+            })
+    })
 }
 
 
 
 
-const connectToDB = (user, password, database) => {
+connectToDB = async (user, password, database) => {
     const connection = mysql.createConnection({
         host: 'localhost',
 
@@ -81,8 +81,9 @@ const connectToDB = (user, password, database) => {
 
     connection.connect((err) => {
         if (err) throw err;
-        console.log(`connected as id ${connection.threadId}`);
-        connection.end();
+        return (`connected as id ${connection.threadId}`);
+
+        //connection.end();
     });
 }
 
