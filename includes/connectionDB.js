@@ -1,10 +1,7 @@
-//let passWord = ''
-//let userName = ''
-//let dbName = ''
 const mysql = require('mysql')
 const inquirer = require('inquirer');
 
-// TODO: Create a function to initialize app
+//User login function to prompt user for login credentials and then connect to the DB
 
 userLogin = async () => {
     return new Promise((resolve, reject) => {
@@ -49,13 +46,9 @@ userLogin = async () => {
         ])
 
             .then((response) => {
-                //console.log(response)
                 return response
             })
             .then((response) => {
-                //console.log(response.database)
-                //console.log(response.password)
-                // console.log(response.username)
                 return resolve(connectToDB(response.username, response.password, response.database))
             })
     })
@@ -80,7 +73,10 @@ connectToDB = async (user, password, database) => {
     });
 
     connection.connect((err) => {
+        //console.log(connection)
         if (err) throw err;
+
+        console.log(`connected as id ${connection.threadId}`);
         return (`connected as id ${connection.threadId}`);
 
         //connection.end();
