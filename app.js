@@ -51,12 +51,12 @@ userSelections = async () => {
             break;
         case "Add Role":
             console.log("You selected: 'Add Role'")
-            addRole();
+            await addData.addRole();
             userSelections();
             break;
         case "Add Employee":
             console.log("You selected: 'Add Employee'")
-            addEmployee();
+            await addData.addEmployee();
             userSelections();
             break;
         case "Update Employee":
