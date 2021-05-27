@@ -17,7 +17,8 @@ userSelections = async () => {
             type: "list",
             name: "userSelection",
             message: "Please select the activity you would like to execute:",
-            choices: ['View Departments', 'View Roles', 'View Employees', 'Add Departments', 'Add Roles', 'Add Employees', 'Update Employee Roles',
+            choices: ['View Departments', 'View Roles', 'View Employees', 'View Full Employee Records',
+                'Add Departments', 'Add Roles', 'Add Employees', 'Update Employee', 'Update Roles',
                 'Delete Departments', 'Delete Roles', 'Delete Employees', 'View Department Budget', "Exit"]
         }
     ]);
@@ -37,6 +38,11 @@ userSelections = async () => {
             await viewData.viewEmployees();
             userSelections();
             break;
+        case "View Full Employee Records":
+            console.log("View Full Employee Records")
+            await viewData.viewEmployees();
+            userSelections();
+            break;
         case "Add Department":
             console.log("Add Department")
             addDepartment();
@@ -52,8 +58,13 @@ userSelections = async () => {
             addEmployee();
             userSelections();
             break;
-        case "Update Employee Role":
-            console.log("Update Employee Role")
+        case "Update Employee":
+            console.log("Update Employee")
+            updateEmpRole();
+            userSelections();
+            break;
+        case "Update Role":
+            console.log("Update Role")
             updateEmpRole();
             userSelections();
             break;
