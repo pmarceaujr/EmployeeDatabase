@@ -1,3 +1,7 @@
+let userName = ''
+let password = ''
+let dbName = ''
+
 const mysql = require('mysql')
 const inquirer = require('inquirer');
 
@@ -5,7 +9,7 @@ const inquirer = require('inquirer');
 
 userLogin = async () => {
     return new Promise((resolve, reject) => {
-        inquirer.prompt([
+        /*inquirer.prompt([
             {
                 name: "username",
                 type: "input",
@@ -43,15 +47,20 @@ userLogin = async () => {
                     }
                 }
             },
-        ])
-
+        ])*/
+        //resolve(connectToDB(userName, password, dbName))
+        resolve(connectToDB('root', 'Password', 'employeeDB'))
+        /*
             .then((response) => {
                 return response
             })
             .then((response) => {
-                resolve(connectToDB(response.username, response.password, response.database))
+                userName = response.username
+                password = response.password
+                dbName = response.database
+                resolve(connectToDB(userName, password, dbName))
             })
-
+*/
     })
 }
 
@@ -72,5 +81,6 @@ connectToDB = async (user, password, database) => {
 }
 
 module.exports = {
-    userLogin//, connectToDB
+    userLogin,
+    connectToDB // connectToDB
 }
