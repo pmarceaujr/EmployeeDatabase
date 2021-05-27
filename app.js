@@ -3,6 +3,7 @@ const banner = require('./includes/figlet.js');
 const inquirer = require('inquirer');
 const connectDB = require('./includes/connectionDB.js');
 const viewData = require('./includes/viewFunctions.js');
+const addData = require('./includes/addFunctions.js');
 
 //start the Employee Database application
 startApp = async () => {
@@ -18,7 +19,7 @@ userSelections = async () => {
             name: "userSelection",
             message: "Please select the activity you would like to execute:",
             choices: ['View Departments', 'View Roles', 'View Employees', 'View Full Employee Records',
-                'Add Departments', 'Add Roles', 'Add Employees', 'Update Employee', 'Update Roles',
+                'Add Department', 'Add Role', 'Add Employee', 'Update Employee', 'Update Roles',
                 'Delete Departments', 'Delete Roles', 'Delete Employees', 'View Department Budget', "Exit"]
         }
     ]);
@@ -45,7 +46,7 @@ userSelections = async () => {
             break;
         case "Add Department":
             console.log("You selected: 'Add Department'")
-            addDepartment();
+            await addData.addDepartment();
             userSelections();
             break;
         case "Add Role":
@@ -92,6 +93,7 @@ userSelections = async () => {
             console.log("Good-Bye!")
             break;
         default:
+            console.log("Invalid entry selected")
             break;
     }
 }
