@@ -10,6 +10,9 @@ figletBanner = async () => {
                 console.log('Something went wrong...');
                 reject(err);
             }
+
+            console.log('')
+            console.log('Welcome to the......')
             console.log('*************************************************')
             console.log(colors.bold.green(data))
             console.log('*************************************************\n')
