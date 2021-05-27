@@ -54,8 +54,30 @@ const viewEmployees = async () => {
     });
 };
 
+const viewFullEmpRecs = async () => {
+    return new Promise((resolve, reject) => {
+        console.log('Here is a list of the full employee records...')
+        connection.query(`SELECT emp.id AS "EMP ID"
+                , CONCAT(emp.first_name,' ',emp.last_name) AS "EMPLOYEE NAME"
+                , salary AS "SALARY"
+                , dept_name AS "DEPARTMENT"                        
+                , title AS "ROLE TITLE"
+                , CONCAT(mgr.first_name,' ',mgr.last_name) AS  "MANAGER NAME" 
+                FROM employees emp, roles rle, departments dpt, employees mgr
+                where dept_id = dpt.id and mgr.id = emp.manager_id and emp.role_id = rle.id order by emp.id `, (err, res) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                console.table(res)
+                resolve(res);
+            }
+        })
+    });
+};
 module.exports = {
     viewDepartments,
     viewRoles,
-    viewEmployees
+    viewEmployees,
+    viewFullEmpRecs
 }
