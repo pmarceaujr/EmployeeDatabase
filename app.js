@@ -24,67 +24,67 @@ userSelections = async () => {
     ]);
     switch (selection.userSelection) {
         case "View Departments":
-            console.log("View Departments")
+            console.log("You selected: 'View Departments'")
             await viewData.viewDepartments();
             userSelections();
             break;
         case "View Roles":
-            console.log("View Roles")
+            console.log("You selected: 'View Roles'")
             await viewData.viewRoles();
             userSelections();
             break;
         case "View Employees":
-            console.log("View Employees")
+            console.log("You selected: 'View Employees'")
             await viewData.viewEmployees();
             userSelections();
             break;
         case "View Full Employee Records":
-            console.log("View Full Employee Records")
-            await viewData.viewEmployees();
+            console.log("You selected: 'View Full Employee Records'")
+            await viewData.viewFullEmpRecs();
             userSelections();
             break;
         case "Add Department":
-            console.log("Add Department")
+            console.log("You selected: 'Add Department'")
             addDepartment();
             userSelections();
             break;
         case "Add Role":
-            console.log("Add Role")
+            console.log("You selected: 'Add Role'")
             addRole();
             userSelections();
             break;
         case "Add Employee":
-            console.log("Add Employee")
+            console.log("You selected: 'Add Employee'")
             addEmployee();
             userSelections();
             break;
         case "Update Employee":
-            console.log("Update Employee")
+            console.log("You selected: 'Update Employee'")
             updateEmpRole();
             userSelections();
             break;
         case "Update Role":
-            console.log("Update Role")
+            console.log("You selected: 'Update Role'")
             updateEmpRole();
             userSelections();
             break;
         case "Delete Department":
-            console.log("Delete Department")
+            console.log("You selected: 'Delete Department'")
             deleteDepartment();
             userSelections();
             break;
         case "Delete Role":
-            console.log("Delete Role")
+            console.log("You selected: 'Delete Role'")
             deleteRole();
             userSelections();
             break;
         case "Delete Employee":
-            console.log("Delete Employee")
+            console.log("You selected: 'Delete Employee'")
             deleteEmployee();
             userSelections();
             break;
         case "View Department Budget":
-            console.log("View Department Budget")
+            console.log("You selected: 'View Department Budget'")
             viewDeptBudget();
             userSelections();
             break;
