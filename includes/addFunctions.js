@@ -16,8 +16,6 @@ const connection = mysql.createConnection({
 const addDepartment = async () => {
     return new Promise((resolve, reject) => {
         console.log("here")
-        // resolve(1)
-        // })
         inquirer.prompt([
             {
                 name: "newDepartment",
@@ -54,8 +52,6 @@ const addDepartment = async () => {
 const addRole = async () => {
     return new Promise((resolve, reject) => {
         console.log("here")
-        // resolve(1)
-        // })
         inquirer.prompt([
             {
                 name: "newRoleName",
@@ -118,33 +114,70 @@ const addRole = async () => {
 const addEmployee = async () => {
     return new Promise((resolve, reject) => {
         console.log("here")
-        // resolve(1)
-        // })
         inquirer.prompt([
             {
-                name: "newDepartment",
+                name: "newEmpFirstName",
                 type: "input",
-                message: "Please enter the name of the new department:",
-                validate: departmentInput => {
-                    if (departmentInput) {
+                message: "Please enter the first name of the new employee:",
+                validate: empFirstNameInput => {
+                    if (empFirstNameInput) {
                         return true;
                     } else {
-                        return "Department name is required. Please enter the name of the new department:"
+                        return "Employee first name is required. Please enter the first name of the new employee:"
+                    }
+                }
+            },
+            {
+                name: "newEmpLastName",
+                type: "input",
+                message: "Please enter the last name of the new employee:",
+                validate: empLastNameInput => {
+                    if (empLastNameInput) {
+                        return true;
+                    } else {
+                        return "Employee last name is required. Please enter the last name of the new employee:"
+                    }
+                }
+            },
+            {
+                name: "newEmpRole",
+                type: "input",
+                message: "Please enter the first name of the new employee:",
+                validate: empRoleInput => {
+                    if (empRoleInput) {
+                        return true;
+                    } else {
+                        return "Employee role is required. Please enter the role of the new employee:"
+                    }
+                }
+            },
+            {
+                name: "newEmpManager",
+                type: "input",
+                message: "Please enter the manager of the new employee:",
+                validate: empManagerInput => {
+                    if (empManagerInput) {
+                        return true;
+                    } else {
+                        return "Employee manager is required. Please enter the manager of the new employee:"
                     }
                 }
             }
         ])
             .then((response) => {
-                console.log(`Adding new department: ${response.newDepartment} `)
+                console.log(`Adding new employee: ${response.newEmpFirstName}  ${response.newEmpLastName} `)
                 connection.query("INSERT INTO departments SET ?",
                     {
-                        dept_name: response.newDepartment
+                        first_name: response.newEmpFirstName,
+                        last_name: response.newEmpLastName,
+                        role_id: response.newEmpRole,
+                        manager_id: response.newEmpManager
                     }, (err, res) => {
                         if (err) {
                             reject(err);
                         }
                         else {
-                            console.table("Success")
+                            console.table(`Success, the new employee: ${response.newEmpFirstName}  ${response.newEmpLastName} has been added. `)
                             resolve(res);
                         }
                     })
