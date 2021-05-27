@@ -10,8 +10,6 @@ const connection = mysql.createConnection({
     database: 'employeeDB',
 });
 
-
-
 const viewDepartments = async () => {
     return new Promise((resolve, reject) => {
         console.log('Here is a list of the departments...')
