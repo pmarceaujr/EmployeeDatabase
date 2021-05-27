@@ -1,3 +1,6 @@
+//This file is a collection of functions to select and display the Departments, Roles and Employees
+
+//Add required mySQL package and execute connection
 const mysql = require('mysql')
 const connection = mysql.createConnection({
     host: 'localhost',
