@@ -55,20 +55,11 @@ userLogin = async () => {
     })
 }
 
-
-
-
 connectToDB = async (user, password, database) => {
     const connection = mysql.createConnection({
         host: 'localhost',
-
-        // Your port, if not 3306
         port: 3306,
-
-        // Your username
         user: user, //'root',
-
-        // Be sure to update with your own MySQL password!
         password: password, //'Password',
         database: database, //'ice_creamDB',
     });
@@ -76,11 +67,7 @@ connectToDB = async (user, password, database) => {
     connection.connect((err) => {
         //console.log(connection)
         if (err) throw err;
-
-        //console.log(`connected as id ${connection.threadId}`);
         return (`connected as id ${connection.threadId}`);
-
-        //connection.end();
     });
 }
 
