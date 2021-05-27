@@ -2,6 +2,7 @@
 const banner = require('./includes/figlet.js');
 const inquirer = require('inquirer');
 const connectDB = require('./includes/connectionDB.js');
+const viewData = require('./includes/viewFunctions.js');
 
 //start the Employee Database application
 startApp = async () => {
@@ -23,17 +24,17 @@ userSelections = async () => {
     switch (selection.userSelection) {
         case "View Departments":
             console.log("View Departments")
-            viewDepartments();
+            await viewData.viewDepartments();
             userSelections();
             break;
         case "View Roles":
             console.log("View Roles")
-            viewRoles();
+            await viewData.viewRoles();
             userSelections();
             break;
         case "View Employees":
             console.log("View Employees")
-            viewEmployees();
+            await viewData.viewEmployees();
             userSelections();
             break;
         case "Add Department":
