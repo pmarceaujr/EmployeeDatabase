@@ -2,6 +2,7 @@
 //This file is a collection of functions to ADD records to the DB tables: Departments, Roles and Employees
 
 //Add required packages and execute connection
+const getData = require('./getFunctions.js');
 const inquirer = require('inquirer');
 const mysql = require('mysql')
 const connection = mysql.createConnection({
@@ -15,7 +16,6 @@ const connection = mysql.createConnection({
 
 const addDepartment = async () => {
     return new Promise((resolve, reject) => {
-        console.log("here")
         inquirer.prompt([
             {
                 name: "newDepartment",
@@ -50,8 +50,9 @@ const addDepartment = async () => {
 
 
 const addRole = async () => {
+    let allDeptRecs = await getData.getAllDepartments()
+    const allDeptData = allDeptRecs.map((dept) => ({ value: dept.dept_id, name: dept.dept_name }));
     return new Promise((resolve, reject) => {
-        console.log("here")
         inquirer.prompt([
             {
                 name: "newRoleName",
@@ -79,8 +80,9 @@ const addRole = async () => {
             },
             {
                 name: "newRoleDeptId",
-                type: "input",
-                message: "Please enter the department of the new role:",
+                type: "list",
+                message: "Please select the department of the new role:",
+                choices: allDeptData,
                 validate: roleDeptInput => {
                     if (roleDeptInput) {
                         return true;
@@ -112,8 +114,11 @@ const addRole = async () => {
 };
 
 const addEmployee = async () => {
+    let allRoleRecs = await getData.getAllRoles()
+    const allRoleData = allRoleRecs.map((role) => ({ value: role.role_id, name: role.role_title }));
+    let allEmpRecs = await getData.getAllEmployees()
+    const allEmpData = allEmpRecs.map((mgr) => ({ value: mgr.manager_id, name: mgr.manager_name }));
     return new Promise((resolve, reject) => {
-        console.log("here")
         inquirer.prompt([
             {
                 name: "newEmpFirstName",
@@ -141,8 +146,9 @@ const addEmployee = async () => {
             },
             {
                 name: "newEmpRole",
-                type: "input",
-                message: "Please enter the first name of the new employee:",
+                type: "list",
+                message: "Please select the role for the new employee:",
+                choices: allRoleData,
                 validate: empRoleInput => {
                     if (empRoleInput) {
                         return true;
@@ -153,8 +159,9 @@ const addEmployee = async () => {
             },
             {
                 name: "newEmpManager",
-                type: "input",
-                message: "Please enter the manager of the new employee:",
+                type: "list",
+                message: "Please select the manager of the new employee:",
+                choices: allEmpData,
                 validate: empManagerInput => {
                     if (empManagerInput) {
                         return true;
@@ -166,7 +173,7 @@ const addEmployee = async () => {
         ])
             .then((response) => {
                 console.log(`Adding new employee: ${response.newEmpFirstName}  ${response.newEmpLastName} `)
-                connection.query("INSERT INTO departments SET ?",
+                connection.query("INSERT INTO employees SET ?",
                     {
                         first_name: response.newEmpFirstName,
                         last_name: response.newEmpLastName,
