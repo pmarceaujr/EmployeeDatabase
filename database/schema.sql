@@ -1,14 +1,14 @@
 DROP DATABASE IF EXISTS employeeDB;
 
 CREATE DATABASE employeeDB;
-
+use employeeDB;
 CREATE TABLE `departments` (
   `id` int NOT NULL AUTO_INCREMENT,
   `dept_name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-ALTER TABLE departments AUTO_INCREMENT = 1
+ALTER TABLE departments AUTO_INCREMENT = 1;
 
 CREATE TABLE `roles` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -20,7 +20,7 @@ CREATE TABLE `roles` (
   CONSTRAINT `role_ibfk_1` FOREIGN KEY (`dept_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-ALTER TABLE roles AUTO_INCREMENT = 1
+ALTER TABLE roles AUTO_INCREMENT = 1;
 
 
 CREATE TABLE `employees` (
