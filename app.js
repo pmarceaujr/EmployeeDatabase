@@ -18,9 +18,30 @@ userSelections = async () => {
             type: "list",
             name: "userSelection",
             message: "Please select the activity you would like to execute:",
-            choices: ['View Departments', 'View Roles', 'View Employees', 'View Full Employee Records',
-                'Add Department', 'Add Role', 'Add Employee', 'Update Employee', 'Update Roles',
-                'Delete Departments', 'Delete Roles', 'Delete Employees', 'View Department Budget', "Exit"]
+            choices: [
+                new inquirer.Separator('---- JUST SHOW ME THE DATA ----'),
+                'View Departments',
+                'View Roles',
+                'View Employees',
+                'View Full Employee Records',
+                'View Employees By Manager',
+                'View Department Budget',
+                new inquirer.Separator('---- LET ME ADD NEW THINGS ----'),
+                'Add Department',
+                'Add Role',
+                'Add Employee',
+                new inquirer.Separator('---- LET ME UPDATE THINGS ----'),
+                'Update Employee',
+                'Update Roles',
+                new inquirer.Separator('---- LET ME DELETE THINGS ----'),
+                'Delete Departments',
+                'Delete Roles',
+                'Delete Employees',
+                new inquirer.Separator('---- TAKE ME AWAY ----'),
+                'Exit'
+            ],
+            pageSize: 20
+
         }
     ]);
     switch (selection.userSelection) {
