@@ -76,9 +76,27 @@ const viewFullEmpRecs = async () => {
         })
     });
 };
+
+const viewDeptBudgets = async () => {
+    return new Promise((resolve, reject) => {
+        console.log('Here is a list of the budgets by department...')
+        connection.query(`select dept_name AS "DEPARTMENT", sum(salary) AS "TOTAL BUDGET" 
+                        from departments dpt, roles rol, employees emp 
+                        where emp.role_id = rol.id and rol.dept_id = dpt.id group by dept_name `, (err, res) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                console.table(res)
+                resolve(res);
+            }
+        })
+    });
+};
 module.exports = {
     viewDepartments,
     viewRoles,
     viewEmployees,
-    viewFullEmpRecs
+    viewFullEmpRecs,
+    viewDeptBudgets
 }
