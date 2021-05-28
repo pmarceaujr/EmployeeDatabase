@@ -19,6 +19,7 @@ userSelections = async () => {
             name: "userSelection",
             message: "Please select the activity you would like to execute:",
             choices: [
+                new inquirer.Separator(' '),
                 new inquirer.Separator('---- JUST SHOW ME THE DATA ----'),
                 'View Departments',
                 'View Roles',
@@ -26,21 +27,25 @@ userSelections = async () => {
                 'View Full Employee Records',
                 'View Employees By Manager',
                 'View Department Budget',
+                new inquirer.Separator(' '),
                 new inquirer.Separator('---- LET ME ADD NEW THINGS ----'),
                 'Add Department',
                 'Add Role',
                 'Add Employee',
+                new inquirer.Separator(' '),
                 new inquirer.Separator('---- LET ME UPDATE THINGS ----'),
                 'Update Employee',
                 'Update Roles',
+                new inquirer.Separator(' '),
                 new inquirer.Separator('---- LET ME DELETE THINGS ----'),
                 'Delete Departments',
                 'Delete Roles',
                 'Delete Employees',
+                new inquirer.Separator(' '),
                 new inquirer.Separator('---- TAKE ME AWAY ----'),
                 'Exit'
             ],
-            pageSize: 20
+            pageSize: 30
 
         }
     ]);
@@ -63,6 +68,11 @@ userSelections = async () => {
         case "View Full Employee Records":
             console.log("You selected: 'View Full Employee Records'")
             await viewData.viewFullEmpRecs();
+            userSelections();
+            break;
+        case "View Department Budget":
+            console.log("You selected: 'View Department Budget'")
+            await viewData.viewDeptBudgets();
             userSelections();
             break;
         case "Add Department":
