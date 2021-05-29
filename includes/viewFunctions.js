@@ -1,6 +1,8 @@
 //This file is a collection of functions to select and display the Departments, Roles and Employees
 
 //Add required mySQL package and execute connection
+const getData = require('./getFunctions.js');
+const inquirer = require('inquirer');
 const mysql = require('mysql')
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -97,10 +99,89 @@ const viewDeptBudgets = async () => {
         })
     });
 };
+
+const viewEmpsByManager = async () => {
+    return new Promise((resolve, reject) => {
+        console.log('Here is a list of ALL employees grouped by manager...')
+        connection.query(`SELECT 
+                        CONCAT(mgr.first_name,' ',mgr.last_name) AS  "Manager Name"
+                        ,CONCAT(emp.first_name,' ',emp.last_name) AS "Employee Name"
+                        , dept_name AS "Department"                        
+                        , title AS "Role Title" 
+                        FROM employees emp left join employees mgr on emp.manager_id = mgr.id, roles rle, departments dpt
+                        where  (dept_id = dpt.id and mgr.id is null and emp.role_id = rle.id ) OR
+                        (dept_id = dpt.id and mgr.id = emp.manager_id and emp.role_id = rle.id )
+                        ORDER by mgr.id `, (err, res) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                console.table(res)
+                resolve(res);
+            }
+        })
+    });
+};
+
+const viewManagersEmps = async () => {
+    let allMgrRecs = await getData.getAllManagers()
+    const allMgrData = allMgrRecs.map((mgr) => ({ value: mgr.manager_id, name: mgr.manager_name }));
+    return new Promise((resolve, reject) => {
+        inquirer.prompt([
+            {
+                name: "selManager",
+                type: "list",
+                message: "Please select the manager to see a list of direct reports:",
+                choices: allMgrData,
+                validate: empManagerInput => {
+                    if (empManagerInput) {
+                        return true;
+                    } else {
+                        return "Manager is required. Please select the manager to see a list of direct reports::"
+                    }
+                }
+            }
+        ])
+            .then((response) => {
+                const mgrRecSelected = allMgrData.filter(function (item) {
+                    return item.value === response.selManager;
+                });
+                var value = mgrRecSelected[0]["name"]
+                console.log(`Showing direct reports for: ${value} `)
+                connection.query(`SELECT 
+                            CONCAT(mgr.first_name,' ',mgr.last_name) AS  "Manager Name"
+                            ,CONCAT(emp.first_name,' ',emp.last_name) AS "Employee Name"
+                            , dept_name AS "Department"                        
+                            , title AS "Role Title" 
+                            FROM employees emp left join employees mgr on emp.manager_id = mgr.id, roles rle, departments dpt
+                            where  
+                            (dept_id = dpt.id and mgr.id = emp.manager_id and emp.role_id = rle.id ) and emp.manager_id = ? 
+                            ORDER by mgr.id`, [response.selManager], (err, res) => {
+                    if (err) {
+                        reject(err);
+                    }
+                    else {
+                        if (res.length) {
+                            console.table(res)
+                        }
+                        else {
+                            console.log(`There are no direct reports for: ${value}.  This employee is not a manager.`)
+                        }
+                        resolve(res);
+                    }
+
+                })
+            })
+    });
+};
+
+
 module.exports = {
     viewDepartments,
     viewRoles,
     viewEmployees,
     viewFullEmpRecs,
-    viewDeptBudgets
+    viewDeptBudgets,
+    viewManagersEmps,
+    viewEmpsByManager
 }
