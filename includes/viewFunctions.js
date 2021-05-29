@@ -58,14 +58,16 @@ const viewEmployees = async () => {
 const viewFullEmpRecs = async () => {
     return new Promise((resolve, reject) => {
         console.log('Here is a list of the full employee records...')
-        connection.query(`SELECT emp.id AS "EMP ID"
-                , CONCAT(emp.first_name,' ',emp.last_name) AS "EMPLOYEE NAME"
-                , salary AS "SALARY"
-                , dept_name AS "DEPARTMENT"                        
-                , title AS "ROLE TITLE"
-                , CONCAT(mgr.first_name,' ',mgr.last_name) AS  "MANAGER NAME" 
-                FROM employees emp, roles rle, departments dpt, employees mgr
-                where dept_id = dpt.id and mgr.id = emp.manager_id and emp.role_id = rle.id order by emp.id `, (err, res) => {
+        connection.query(`SELECT emp.id AS "Emp ID"
+                        , CONCAT(emp.first_name,' ',emp.last_name) AS "Employee Name"
+                        , salary AS "Salary"
+                        , dept_name AS "Department"                        
+                        , title AS "Role Title"
+                        , CONCAT(mgr.first_name,' ',mgr.last_name) AS  "Manager Name" 
+                        FROM employees emp left join employees mgr on emp.manager_id = mgr.id, roles rle, departments dpt
+                        where  (dept_id = dpt.id and mgr.id is null and emp.role_id = rle.id ) OR
+                        (dept_id = dpt.id and mgr.id = emp.manager_id and emp.role_id = rle.id )
+                        ORDER by emp.id`, (err, res) => {
             if (err) {
                 reject(err);
             }
@@ -80,9 +82,11 @@ const viewFullEmpRecs = async () => {
 const viewDeptBudgets = async () => {
     return new Promise((resolve, reject) => {
         console.log('Here is a list of the budgets by department...')
-        connection.query(`select dept_name AS "DEPARTMENT", sum(salary) AS "TOTAL BUDGET" 
-                        from departments dpt, roles rol, employees emp 
-                        where emp.role_id = rol.id and rol.dept_id = dpt.id group by dept_name `, (err, res) => {
+        connection.query(`SELECT departments.dept_name AS "Department Name", count(employees.id) AS "Nbr Employees", SUM(salary) AS 'Total Dept. Budget'
+                            FROM  employees
+                            LEFT JOIN roles ON employees.role_id=roles.id, departments
+                            WHERE roles.dept_id = departments.id
+                            GROUP BY dept_name; `, (err, res) => {
             if (err) {
                 reject(err);
             }
