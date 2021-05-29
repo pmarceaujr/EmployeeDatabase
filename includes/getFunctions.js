@@ -38,6 +38,19 @@ const getAllRoles = () => {
 
 const getAllEmployees = async () => {
     return new Promise((resolve, reject) => {
+        connection.query('SELECT id AS "employee_id", CONCAT(first_name," ",last_name) AS "employee_name" FROM employees', (err, res) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                resolve(res);
+            }
+        })
+    });
+};
+
+const getAllManagers = async () => {
+    return new Promise((resolve, reject) => {
         connection.query('SELECT id AS "manager_id", CONCAT(first_name," ",last_name) AS "manager_name" FROM employees', (err, res) => {
             if (err) {
                 reject(err);
@@ -52,7 +65,8 @@ const getAllEmployees = async () => {
 module.exports = {
     getAllDepartments,
     getAllRoles,
-    getAllEmployees
+    getAllEmployees,
+    getAllManagers
     //,
     //getAllFullEmpRecs
 };
