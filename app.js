@@ -125,6 +125,7 @@ userSelections = async () => {
             break;
         default:
             console.log("Invalid entry selected")
+            userSelections();
             break;
     }
 }
