@@ -116,7 +116,7 @@ const addRole = async () => {
 const addEmployee = async () => {
     let allRoleRecs = await getData.getAllRoles()
     const allRoleData = allRoleRecs.map((role) => ({ value: role.role_id, name: role.role_title }));
-    let allEmpRecs = await getData.getAllEmployees()
+    let allEmpRecs = await getData.getAllManagers()
     const allEmpData = allEmpRecs.map((mgr) => ({ value: mgr.manager_id, name: mgr.manager_name }));
     return new Promise((resolve, reject) => {
         inquirer.prompt([
