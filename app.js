@@ -4,6 +4,7 @@ const inquirer = require('inquirer');
 const connectDB = require('./includes/connectionDB.js');
 const viewData = require('./includes/viewFunctions.js');
 const addData = require('./includes/addFunctions.js');
+const delData = require('./includes/deleteFunctions.js');
 
 //start the Employee Database application
 startApp = async () => {
@@ -38,9 +39,9 @@ userSelections = async () => {
                 'Update Roles',
                 new inquirer.Separator(' '),
                 new inquirer.Separator('---- LET ME DELETE THINGS ----'),
-                'Delete Departments',
-                'Delete Roles',
-                'Delete Employees',
+                'Delete Department',
+                'Delete Role',
+                'Delete Employee',
                 new inquirer.Separator(' '),
                 new inquirer.Separator('---- TAKE ME AWAY ----'),
                 'Exit'
@@ -102,17 +103,17 @@ userSelections = async () => {
             break;
         case "Delete Department":
             console.log("You selected: 'Delete Department'")
-            deleteDepartment();
+            await delData.delDepartment();
             userSelections();
             break;
         case "Delete Role":
             console.log("You selected: 'Delete Role'")
-            deleteRole();
+            await delData.delRole();
             userSelections();
             break;
         case "Delete Employee":
             console.log("You selected: 'Delete Employee'")
-            deleteEmployee();
+            await delData.delEmployee();
             userSelections();
             break;
         case "View Department Budget":
