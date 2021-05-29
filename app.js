@@ -21,29 +21,30 @@ userSelections = async () => {
             message: "Please select the activity you would like to execute:",
             choices: [
                 new inquirer.Separator(' '),
-                new inquirer.Separator('---- JUST SHOW ME THE DATA ----'),
+                new inquirer.Separator('---- I JUST WANT TO SEE THE DATA ----'),
                 'View Departments',
                 'View Roles',
                 'View Employees',
                 'View Full Employee Records',
-                'View Employees By Manager',
+                'View Employees For A Manager',
+                'View All Employees Grouped By Manager',
                 'View Department Budget',
                 new inquirer.Separator(' '),
-                new inquirer.Separator('---- LET ME ADD NEW THINGS ----'),
+                new inquirer.Separator('---- I JUST WANT TO ADD NEW THINGS ----'),
                 'Add Department',
                 'Add Role',
                 'Add Employee',
                 new inquirer.Separator(' '),
-                new inquirer.Separator('---- LET ME UPDATE THINGS ----'),
+                new inquirer.Separator('---- I JUST WANT TO UPDATE THINGS ----'),
                 'Update Employee',
                 'Update Roles',
                 new inquirer.Separator(' '),
-                new inquirer.Separator('---- LET ME DELETE THINGS ----'),
+                new inquirer.Separator('---- I JUST WANT TO DELETE THINGS ----'),
                 'Delete Department',
                 'Delete Role',
                 'Delete Employee',
                 new inquirer.Separator(' '),
-                new inquirer.Separator('---- TAKE ME AWAY ----'),
+                new inquirer.Separator("---- I'VE HAD ENOUGH...TAKE ME AWAY ----"),
                 'Exit'
             ],
             pageSize: 30
@@ -69,6 +70,16 @@ userSelections = async () => {
         case "View Full Employee Records":
             console.log("You selected: 'View Full Employee Records'")
             await viewData.viewFullEmpRecs();
+            userSelections();
+            break;
+        case "View Employees For A Manager":
+            console.log("You selected: 'View Employees For A Manager'")
+            await viewData.viewManagersEmps();
+            userSelections();
+            break;
+        case "View All Employees Grouped By Manager":
+            console.log("You selected: 'View All Employees Grouped By Manager'")
+            await viewData.viewEmpsByManager();
             userSelections();
             break;
         case "View Department Budget":
