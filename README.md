@@ -42,7 +42,7 @@ You will start the application by typing "npm start" in the command line.<br>You
 
 ## test1
 
-![media file 1](./includes/images/test1)
+![media file 1](./includes/images/Screenshot1.png)
 
 ## tests2
 
