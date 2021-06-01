@@ -2,9 +2,11 @@
 //This file is a collection of functions to ADD records to the DB tables: Departments, Roles and Employees
 
 //Add required packages and execute connection
-const getData = require('./getFunctions.js');
+const colors = require("ansi-colors");
+const conTable = require('console.table')
 const inquirer = require('inquirer');
 const mysql = require('mysql')
+const getData = require('./getFunctions.js');
 const connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
@@ -31,7 +33,8 @@ const addDepartment = async () => {
             }
         ])
             .then((response) => {
-                console.log(`Adding new department: ${response.newDepartment} `)
+                console.log('')
+                console.log(colors.bold.blue(`Adding new department: ${response.newDepartment} `))
                 connection.query("INSERT INTO departments SET ?",
                     {
                         dept_name: response.newDepartment
@@ -94,7 +97,8 @@ const addRole = async () => {
 
         ])
             .then((response) => {
-                console.log(`Adding new role: ${response.newRoleName} `)
+                console.log('')
+                console.log(colors.bold.blue(`Adding new role: ${response.newRoleName} `))
                 connection.query("INSERT INTO roles SET ?",
                     {
                         title: response.newRoleName,
@@ -172,7 +176,8 @@ const addEmployee = async () => {
             }
         ])
             .then((response) => {
-                console.log(`Adding new employee: ${response.newEmpFirstName}  ${response.newEmpLastName} `)
+                console.log('')
+                console.log(colors.bold.blue(`Adding new employee: ${response.newEmpFirstName}  ${response.newEmpLastName} `))
                 connection.query("INSERT INTO employees SET ?",
                     {
                         first_name: response.newEmpFirstName,

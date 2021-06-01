@@ -1,10 +1,13 @@
 //This file is a collection of functions to select and display the Departments, Roles and Employees
 
 //Add required mySQL package and execute connection
-const getData = require('./getFunctions.js');
+const colors = require("ansi-colors");
+const conTable = require('console.table')
 const inquirer = require('inquirer');
 const mysql = require('mysql')
-//const connection = require('./connectionDB')
+const getData = require('./getFunctions.js');
+
+
 const connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
@@ -15,7 +18,8 @@ const connection = mysql.createConnection({
 
 const viewDepartments = async () => {
     return new Promise((resolve, reject) => {
-        console.log('Here is a list of the departments...')
+        console.log('')
+        console.log(colors.bold.blue('Here is a list of the departments...'))
         connection.query('SELECT id as "DEPT ID", dept_name AS "Department Name" FROM departments', (err, res) => {
             if (err) {
                 reject(err);
@@ -30,7 +34,8 @@ const viewDepartments = async () => {
 
 const viewRoles = async () => {
     return new Promise((resolve, reject) => {
-        console.log('Here is a list of the roles...')
+        console.log('')
+        console.log(colors.bold.blue('Here is a list of the roles...'))
         connection.query('SELECT id AS "ROLE ID", title AS "ROLE TITLE", salary AS "SALARY", dept_id AS "DEPT ID" FROM roles', (err, res) => {
             if (err) {
                 reject(err);
@@ -45,7 +50,8 @@ const viewRoles = async () => {
 
 const viewEmployees = async () => {
     return new Promise((resolve, reject) => {
-        console.log('Here is a list of the employees...')
+        console.log('')
+        console.log(colors.bold.blue('Here is a list of the employees...'))
         connection.query('SELECT id AS "EMP ID", first_name AS "FIRST NAME", last_name AS "LAST NAME", role_id AS "ROLE ID", manager_id AS "MANAGER ID" FROM employees', (err, res) => {
             if (err) {
                 reject(err);
@@ -60,7 +66,8 @@ const viewEmployees = async () => {
 
 const viewFullEmpRecs = async () => {
     return new Promise((resolve, reject) => {
-        console.log('Here is a list of the full employee records...')
+        console.log('')
+        console.log(colors.bold.blue('Here is a list of the full employee records...'))
         connection.query(`SELECT emp.id AS "Emp ID"
                         , CONCAT(emp.first_name,' ',emp.last_name) AS "Employee Name"
                         , salary AS "Salary"
@@ -84,7 +91,8 @@ const viewFullEmpRecs = async () => {
 
 const viewDeptBudgets = async () => {
     return new Promise((resolve, reject) => {
-        console.log('Here is a list of the budgets by department...')
+        console.log('')
+        console.log(colors.bold.blue('Here is a list of the budgets by department...'))
         connection.query(`SELECT departments.dept_name AS "Department Name", count(employees.id) AS "Nbr Employees", SUM(salary) AS 'Total Dept. Budget'
                             FROM  employees
                             LEFT JOIN roles ON employees.role_id=roles.id, departments
@@ -103,7 +111,8 @@ const viewDeptBudgets = async () => {
 
 const viewEmpsByManager = async () => {
     return new Promise((resolve, reject) => {
-        console.log('Here is a list of ALL employees grouped by manager...')
+        console.log('')
+        console.log(colors.bold.blue('Here is a list of ALL employees grouped by manager...'))
         connection.query(`SELECT 
                         CONCAT(mgr.first_name,' ',mgr.last_name) AS  "Manager Name"
                         ,CONCAT(emp.first_name,' ',emp.last_name) AS "Employee Name"
@@ -148,7 +157,8 @@ const viewManagersEmps = async () => {
                     return item.value === response.selManager;
                 });
                 var value = mgrRecSelected[0]["name"]
-                console.log(`Showing direct reports for: ${value} `)
+                console.log('')
+                console.log(colors.bold.blue(`Showing direct reports for: ${value} `))
                 connection.query(`SELECT 
                             CONCAT(mgr.first_name,' ',mgr.last_name) AS  "Manager Name"
                             ,CONCAT(emp.first_name,' ',emp.last_name) AS "Employee Name"
@@ -166,7 +176,7 @@ const viewManagersEmps = async () => {
                             console.table(res)
                         }
                         else {
-                            console.log(`There are no direct reports for: ${value}.  This employee is not a manager.`)
+                            console.log(colors.bold.red(`There are no direct reports for: ${value}.  This employee is not a manager.`))
                         }
                         resolve(res);
                     }

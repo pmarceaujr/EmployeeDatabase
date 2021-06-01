@@ -2,9 +2,11 @@
 //This file is a collection of functions to DELETE records to the DB tables: Departments, Roles and Employees
 
 //Add required packages and execute connection
-const getData = require('./getFunctions.js');
+const colors = require("ansi-colors");
+const conTable = require('console.table')
 const inquirer = require('inquirer');
 const mysql = require('mysql')
+const getData = require('./getFunctions.js');
 const connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
@@ -38,8 +40,8 @@ const delDepartment = async () => {
                     return item.value === response.delDepartment;
                 });
                 var value = deptRecSelected[0]["name"]
-                console.log(value)
-                console.log(`Deleting department: ${value} `)
+                console.log('')
+                console.log(colors.bold.red(`Deleting department: ${value} `))
                 connection.query("DELETE FROM departments WHERE ?",
                     {
                         id: response.delDepartment
@@ -82,8 +84,8 @@ const delRole = async () => {
                     return item.value === response.delRole;
                 });
                 var value = roleRecSelected[0]["name"]
-                console.log(value)
-                console.log(`Deleting  role: ${value} `)
+                console.log('')
+                console.log(colors.bold.red(`Deleting  role: ${value} `))
                 connection.query("DELETE FROM roles WHERE ?",
                     {
                         id: response.delRole
@@ -124,8 +126,8 @@ const delEmployee = async () => {
                     return item.value === response.delEmployee;
                 });
                 var value = empRecSelected[0]["name"]
-                console.log(value)
-                console.log(`Deleting employee: ${value} `)
+                console.log('')
+                console.log(colors.bold.red(`Deleting employee: ${value} `))
                 connection.query("DELETE FROM employees WHERE ?",
                     {
                         id: response.delEmployee
