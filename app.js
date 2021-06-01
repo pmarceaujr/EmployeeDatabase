@@ -5,6 +5,7 @@ const connectDB = require('./includes/connectionDB.js');
 const viewData = require('./includes/viewFunctions.js');
 const addData = require('./includes/addFunctions.js');
 const delData = require('./includes/deleteFunctions.js');
+const updData = require('./includes/updateFunctions.js');
 
 //start the Employee Database application
 startApp = async () => {
@@ -104,7 +105,7 @@ userSelections = async () => {
             break;
         case "Update Employee":
             console.log("You selected: 'Update Employee'")
-            updateEmpRole();
+            await updData.mgrToGetNewEmp();
             userSelections();
             break;
         case "Update Role":
