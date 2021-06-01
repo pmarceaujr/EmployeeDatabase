@@ -110,8 +110,6 @@ const updateRoleForEmp = async () => {
                 const roleRecSelected = allRoleData.filter(function (item) {
                     return item.value === response.roleToGetNewEmp;
                 });
-                console.log(empRecSelected)
-                console.log(roleRecSelected)
                 empName = empRecSelected[0]["name"]
                 empId = response.empToGetNewRole;
                 roleName = roleRecSelected[0]["name"]
