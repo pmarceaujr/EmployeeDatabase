@@ -54,10 +54,10 @@ You will start the application by typing "npm start" in the command line.<br>You
 
 ## Full Demo video link:
 
-Link1: All Views, Adds and Updates:<br>
+Link1: All Views and Adds:<br>
 https://drive.google.com/file/d/1oOV4vtnd2d9CfYdQVQDLwuJx1JrqkHT5/view?usp=sharing
 
-Link2: All Deletes:<br>
+Link2: All Updates and Deletes:<br>
 https://drive.google.com/file/d/1KcOQOJwwCLT6ys81enKwPz1W4BnilQLq/view?usp=sharing
 
 ## **Required**
