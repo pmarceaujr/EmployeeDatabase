@@ -50,14 +50,14 @@ You will start the application by typing "npm start" in the command line.<br>You
 
 ## Budget By Department
 
-![media file 3]((./includes/images/Screenshot3.png)
+![media file 3](./includes/images/Screenshot3.png)
 
 ## Full Demo video link:
 
-Link1: All Views, Adds and Updates:
+Link1: All Views, Adds and Updates:<br>
 https://drive.google.com/file/d/1oOV4vtnd2d9CfYdQVQDLwuJx1JrqkHT5/view?usp=sharing
 
-Link2: All Deletes:
+Link2: All Deletes:<br>
 https://drive.google.com/file/d/1KcOQOJwwCLT6ys81enKwPz1W4BnilQLq/view?usp=sharing
 
 ## **Required**
