@@ -40,17 +40,25 @@ You will start the application by typing "npm start" in the command line.<br>You
 
 ## **Media** **Links**
 
-## test1
+## Main Screenshot
 
 ![media file 1](./includes/images/Screenshot1.png)
 
-## tests2
+## All Employees View
 
-![media file 2](./includes/images/test2)
+![media file 2](./includes/images/Screenshot2.png)
 
-## test3
+## Budget By Department
 
-![media file 3](./includes/images/test3)
+![media file 3]((./includes/images/Screenshot3.png)
+
+## Full Demo video link:
+
+Link1: All Views, Adds and Updates:
+https://drive.google.com/file/d/1oOV4vtnd2d9CfYdQVQDLwuJx1JrqkHT5/view?usp=sharing
+
+Link2: All Deletes:
+https://drive.google.com/file/d/1KcOQOJwwCLT6ys81enKwPz1W4BnilQLq/view?usp=sharing
 
 ## **Required**
 
